@@ -1,0 +1,56 @@
+3
+
+0L鶽?  ?               @   s?  d dl mZ d dl mZ d dl mZ d dlZee?Zdd? Zejddd	gd
+?dd? ?Z	ejd
+d	gd
+?dd? ?Z
+ejddgd
+?dd? ?Zejddgd
+?dd? ?Zejddgd
+?dd? ?Z
+ejddgd
+?dd? ?Zejddgd
+?dd? ?Zejddgd
+?d d!? ?Zejd"dgd
+?d#d$? ?Zejd%dgd
+?d&d'? ?Zejd(dgd
+?d)d*? ?Zejd+dgd
+?d,d-? ?Zejd.dgd
+?d/d0? ?Zejd1dgd
+?d2d3? ?Zed4k?r爀j?  dS )5?    )?Flask)?request)?render_templateNc             C   sR   t jddddddd?}|j? }|jd|  ?}|j|?}|j?  |j?  |j?  |S )Nz	127.0.0.1i?  ?rootZguanli?utf8)?host?port?user?passwd?db?charsetzselect * from )?pymysql?connectZcursorZexecuteZ	fetchmany?closeZcommit)?table?conn?cur?res? r   ?C:\Users\sukun\Desktop\PythonGouJianDeJiaoWuXiTong\code.py?get_Table_Data   s    
+
+r   ?/?GET?POST)?methodsc               C   s   t d?S )Nz
+login.html)r   r   r   r   r   ?home    s    r   z/loginc               C   s,   t jd dkr$t jd dkr$td?S td?S )N?usernameZstudent?passwordzstudent_index.htmlzteacher_index.html)r   ?formr   r   r   r   r   ?login(   s    r   z/student_indexc               C   s   t d?S )Nzstudent_index.html)r   r   r   r   r   ?student_index1   s    r    z/teacher_indexc               C   s   t d?S )Nzteacher_index.html)r   r   r   r   r   ?teacher_index6   s    r!   z/jxjhc              C   s?   t d?} g }xn| D ]f}i }|d |d< |d |d< |d |d< |d |d	< |d
+ |d< |d |d
+< |d |d< |j|? qW td|d?S )NZ
+jihuaxijier   ?a?   ?b?   ?c?   ?d?   ?e?   ?f?   ?gzteacher.html)?posts)r   ?appendr   )?datar/   ?value?dict_datar   r   r   ?jxjh=   s    
+r4   z
+/guanlibanc              C   s?   t d?} g }xn| D ]f}i }|d |d< |d |d< |d |d< |d |d	< |d
+ |d< |d |d
+< |d |d< |j|? qW td|d?S )N?guanlibanr   r"   r#   r$   r%   r&   r'   r(   r)   r*   r+   r,   r-   r.   zteacher.html)r/   )r   r0   r   )r1   r/   r2   r3   r   r   r   r5   R   s    
+r5   z	/paike_jsc              C   s|   t d?} g }xb| D ]Z}i }|d |d< |d |d< |d |d< |d |d	< |d
+ |d< |d |d
+< |j|? qW td|d?S )N?paike_jsr   r"   r#   r$   r%   r&   r'   r(   r)   r*   r+   r,   zteacher.html)r/   )r   r0   r   )r1   r/   r2   r3   r   r   r   r6   f   s    
+r6   z/xscjc              C   s|   t d?} g }xb| D ]Z}i }|d |d< |d |d< |d |d< |d |d	< |d
+ |d< |d |d
+< |j|? qW td|d?S )NZxueshengchengjir   r"   r#   r$   r%   r&   r'   r(   r)   r*   r+   r,   zteacher.html)r/   )r   r0   r   )r1   r/   r2   r3   r   r   r   ?xscjy   s    
+r7   z/xslbc              C   sp   t d?} g }xV| D ]N}i }|d |d< |d |d< |d |d< |d |d	< |d
+ |d< |j|? qW td|d
+?S )N?xslbr   r"   r#   r$   r%   r&   r'   r(   r)   r*   zteacher.html)r/   )r   r0   r   )r1   r/   r2   r3   r   r   r   r8   ?   s    
+r8   z	/tjiaoshic              C   s|   t d?} g }xb| D ]Z}i }|d |d< |d |d< |d |d< |d |d	< |d
+ |d< |d |d
+< |j|? qW td|d?S )N?tjiaoshir   r"   r#   r$   r%   r&   r'   r(   r)   r*   r+   r,   zstudent.html)r/   )r   r0   r   )r1   r/   r2   r3   r   r   r   r9   ?   s    
+r9   z/kechengc              C   s|   t d?} g }xb| D ]Z}i }|d |d< |d |d< |d |d< |d |d	< |d
+ |d< |d |d
+< |j|? qW td|d?S )N?kechengr   r"   r#   r$   r%   r&   r'   r(   r)   r*   r+   r,   zstudent.html)r/   )r   r0   r   )r1   r/   r2   r3   r   r   r   r:   ?   s    
+r:   z/zhuanyec              C   sp   t d?} g }xV| D ]N}i }|d |d< |d |d< |d |d< |d |d	< |d
+ |d< |j|? qW td|d
+?S )N?zhuanyer   r"   r#   r$   r%   r&   r'   r(   r)   r*   zstudent.html)r/   )r   r0   r   )r1   r/   r2   r3   r   r   r   r;   ?   s    
+r;   z/xueyuanc              C   sd   t d?} g }xJ| D ]B}i }|d |d< |d |d< |d |d< |d |d	< |j|? qW td
+|d?S )N?xueyuanr   r"   r#   r$   r%   r&   r'   r(   zstudent.html)r/   )r   r0   r   )r1   r/   r2   r3   r   r   r   r<   ?   s    
+r<   z/jsc              C   s?   t d?} g }x抾 D ]妢i }|d |d< |d |d< |d |d< |d |d	< |d
+ |d< |d |d
+< |d |d< |d |d< |d |d< |d |d< |j|? qW td|d?S )NZjiaoshir   r"   r#   r$   r%   r&   r'   r(   r)   r*   r+   r,   r-   r.   ?   ?h?   ?i?   ?jz	xscj.html)r/   )r   r0   r   )r1   r/   r2   r3   r   r   r   ?js?   s     
+rC   ?__main__)?flaskr   r   r   r
+   ?__name__?appr   ?router   r   r    r!   r4   r5   r6   r7   r8   r9   r:   r;   r<   rC   ?runr   r   r   r   ?<module>   s*   	
+
